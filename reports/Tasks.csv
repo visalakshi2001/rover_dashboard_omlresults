@@ -1,0 +1,12 @@
+,TaskID,Description,StudentName,Outputs
+0,SIE2501-10,Import SYSMLV2 Files into Violet,Dominick D'Emilio,
+1,SIE2501-16,Create a Verification Plan for the System,Ashley Ferrell,Rover_Verification_Strategy
+2,SIE2501-17,Create a detailed Hardware design (CAD model) for System,Jace Cascarini,SIE250_CADModel
+3,SIE2501-22,Construct Rover and all Hardware Components,Sebastian Alcantar,
+4,SIE2501-23,Integrate all hardware and software to complete system architecture,Sebastian Alcantar,
+5,SIE2501-24,Run Verification Tests according to Verification Plan,Sebastian Alcantar,
+6,SIE2501-27,Complete mass analysis verification activity,Katelyn Miller,
+7,SIE2501-3,Define System Requirements,Katelyn Miller,"Terrain Requirement, Trash Requirement, Autonomous Requirement, Remote Control Requirement, Cargo Requirement, Spinning Requirement, Mass Requirement"
+8,SIE2501-4,Refine Stakeholder Needs,Katelyn Miller,
+9,SIE2501-7,Create a System Architecture,Jace Cascarini,"ProvideRoverPropulsion, Group1_Rover"
+10,SIE2501-9,Create and Assign Jira Tasks,Carter Buss,

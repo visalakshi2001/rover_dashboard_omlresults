@@ -1,0 +1,5 @@
+,Test,TestSubject,TestOutput,VerifiesRequirement
+0,CargoTest,Group1_Rover,,SYS-4
+1,CoGTest,Group1_Rover,,
+2,MassTest,Group1_Rover,MassTest_MassMeasurement,SYS-7
+3,ThermalTest,Group1_Rover,,
