@@ -44,7 +44,7 @@ def dashboard():
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIGURE 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     with topcols[0]:    
-        st.plotly_chart(fig1)
+        st.plotly_chart(fig1, use_container_width=True)
     
     task['Start'] = pd.date_range(start='2023-01-01', periods=len(task), freq='M')
     task['Finish'] = task['Start'] + pd.Timedelta(days=30)
@@ -103,7 +103,7 @@ def dashboard():
     fig6.update_traces(hovertemplate="Student: %{customdata[0]} <br> Task: %{customdata[1]} <br> CompletedWithOutput: %{y}")
     
     with bottomcols[0]:
-        st.plotly_chart(fig6)
+        st.plotly_chart(fig6, use_container_width=True)
 
     # Creating the treemap
     labels = []
@@ -111,7 +111,6 @@ def dashboard():
     hovertexts = []
 
     # Add requirements
-    # for req in reqs:
     labels.extend(reqs["ReqName"].to_list())
     parents.extend(["" for req in reqs["ReqName"]])
     hovertexts.extend(reqs["ReqText"])
@@ -304,3 +303,130 @@ def dashboard():
     #                  xaxis=dict(showgrid=False, zeroline=False),
     #                  yaxis=dict(showgrid=False, zeroline=False)))
 
+
+def tne():
+    colors = px.colors.qualitative.Plotly
+
+    keycap = pd.read_csv(os.path.join("reports", "Query5_KeyCapabilities.csv"), index_col=0)
+    schdata = pd.read_csv(os.path.join("reports", "Query6_Scheduling.csv"), index_col=0)
+
+    topcols = st.columns([1,1])
+
+    with topcols[0]:
+    
+        metriccols = st.columns(3)
+
+        with metriccols[0]:
+            for idx,row in keycap.iterrows():
+                if idx % 3 == 0:
+                    st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
+                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            )
+        
+        with metriccols[1]:
+            for idx,row in keycap.iterrows():
+                if idx % 3 == 1:
+                    st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
+                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            )
+        
+        with metriccols[2]:
+            for idx,row in keycap.iterrows():
+                if idx % 3 == 2:
+                    st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
+                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            )
+                
+        st.write(
+                """
+                <style>
+                [data-testid="stMetricDelta"] svg {
+                    display: none;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+    
+    with topcols[1]:
+        keycap["newObj"] = np.where(keycap["Objective"] > 100, keycap["Objective"]/100, keycap["Objective"])
+        keycap["newThr"] = np.where(keycap["Threshold"] > 100, keycap["Threshold"]/100, keycap["Threshold"])
+        fig0 = go.Figure(data=[
+            go.Bar(name='Objective', y=keycap["KCName"] + " " + keycap["SatisfiedBy"], x=keycap["newObj"], 
+                orientation="h", marker=dict(color=colors[1], opacity=0.5), customdata=keycap["VerificationMethodName"], hovertemplate=" %{customdata} ",
+                ),
+            go.Bar(name='Threshold', y=keycap["KCName"] + " " + keycap["SatisfiedBy"], x=keycap["newThr"],
+                orientation="h", marker=dict(color=colors[2], opacity=0.5), customdata=keycap["VerificationMethodName"], hovertemplate="Verified by %{customdata} ",
+                )
+        ])
+
+        annotations = []
+        for xd, yd, xdn in zip(keycap["newObj"], keycap["KCName"] + " " + keycap["SatisfiedBy"], keycap["Objective"]):
+            annotations.append(dict(xref="x1", yref="y1",
+                                    x = xd + 8, y = yd,
+                                    text= str(xdn), showarrow=False,
+                                    font_color = colors[1],
+                                    font_size=16))
+        for xd, yd, xdn in zip(keycap["newThr"], keycap["KCName"] + " " + keycap["SatisfiedBy"], keycap["Threshold"]):
+            annotations.append(dict(xref="x1", yref="y1",
+                                    x = xd, y = yd,
+                                    text= str(xdn), showarrow=False,
+                                    font_color = "black"
+                                    ))
+
+        fig0.update_layout(barmode='overlay', title='Key capacities fulfilled', annotations=annotations)
+        fig0.update_traces(width=0.7)
+        fig0.update_yaxes(tickfont_size=14, tickfont_color="black")
+
+        st.plotly_chart(fig0, use_container_width=True)
+
+    middlecols = st.columns([1.5, 0.5])
+
+    with middlecols[0]:
+        schdata["Site"] = np.where(pd.isnull(schdata["Site"]), "None", schdata["Site"])
+        fig1 = px.bar(schdata, y="TestSubjects", orientation="h", color="Site",
+                    text="VMName", title="Allocated resources (VM) to Subjects", 
+                    custom_data="VMName")
+
+        fig1.update_traces(textposition="inside", hovertemplate="%{customdata}", textfont_size=16)
+        fig1.update_yaxes(tickfont_size=16, tickfont_color="black")
+        fig1.update_layout(legend=dict(xanchor="left", yanchor="bottom", x=0, y=1, orientation="h"))
+
+        st.plotly_chart(fig1, use_container_width=True)
+
+    with middlecols[1]:
+        site_counts = schdata["Site"].value_counts().reset_index()
+        site_counts.columns = ["Site", "Count"]
+        fig2 = px.pie(site_counts, names="Site", values="Count", title="Distribution of Tests per Site")
+
+        st.plotly_chart(fig2, use_container_width=True)
+
+    fig3 = px.timeline(schdata, x_start="Start", x_end="End", y="TestSubjects", color="VMName", 
+                       title="Test Schedules", custom_data=["Start", "End", "VMName"])
+    fig3.update_traces(width=1)
+
+    fig3.add_trace(go.Scatter(name="TimeStamp", x=schdata["End"], y=schdata["TestSubjects"], 
+                              mode="markers",
+                              marker=dict(
+                                size=10,
+                                ),
+                                # hovertemplate="",
+                                customdata=[schdata["Start"], schdata["End"]],
+                            showlegend=False,
+                            )
+                   )
+    fig3.update_traces(hovertemplate="Start: %{customdata[0]} <br> End: %{customdata[1]} <br> VMName: %{customdata[2]}")
+
+    st.plotly_chart(fig3,use_container_width=True)
+
+    print(schdata["End"])
+
+    # # Sunburst Chart of Test Distribution by Site and Test Type
+    # sunburst_data = schdata[pd.notnull(schdata['Site'])]
+    # fig4 = px.sunburst(sunburst_data, path=['Site', 'VMName'], title="Test Distribution by Site and Test Type")
+
+    # fig4.update_traces(textfont_size=16)
+    # st.plotly_chart(fig4, use_container_width=True)
