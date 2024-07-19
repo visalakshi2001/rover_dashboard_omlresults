@@ -28,28 +28,31 @@ def dashboard():
         go.Bar(name='Satisfied', y=reqdata["RequirementName"], x=reqdata["Satisfied"], 
                orientation="h", marker=dict(color=colors[2]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
                ),
-    go.Bar(name='Verified', y=reqdata["RequirementName"], x=reqdata["Verified"], 
-           orientation="h", marker=dict(color=colors[0]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
-           ),
-    go.Bar(name='Pending', y=reqdata["RequirementName"], x=reqdata["Pending"], 
-           orientation="h", marker=dict(color=colors[1]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
-           )
+        go.Bar(name='Verified', y=reqdata["RequirementName"], x=reqdata["Verified"], 
+            orientation="h", marker=dict(color=colors[0]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
+            ),
+        go.Bar(name='Pending', y=reqdata["RequirementName"], x=reqdata["Pending"], 
+            orientation="h", marker=dict(color=colors[1]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
+            )
     ])
 
     fig1.update_layout(barmode='stack', title='Requirements Satisfaction and Verification Status')
+    fig1.update_yaxes(tickfont_size=16, tickfont_color="black")
 
     topcols = st.columns([1, 1.5])
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIGURE 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     with topcols[0]:    
-        st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1)
     
     task['Start'] = pd.date_range(start='2023-01-01', periods=len(task), freq='M')
     task['Finish'] = task['Start'] + pd.Timedelta(days=30)
 
     fig2 = px.timeline(task, x_start="Start", x_end="Finish", y="Description", color="StudentName", title='Task Timeline')
     fig2.update_layout(legend=dict(xanchor="left", x=0, y=1, yanchor="bottom", orientation="h"))
+    fig2.update_yaxes(tickfont_size=16, tickfont_color="black")
+    fig2.update_xaxes(tickfont_size=16, tickfont_color="black")
 
     with topcols[1]:    
         st.plotly_chart(fig2, use_container_width=True)
@@ -64,7 +67,8 @@ def dashboard():
                   color_discrete_map= {"Completed": colors[0], "Not Completed": colors[1]},
                   labels={'x': 'Student', 'y': 'Number of Tasks'})
 
-    fig3.update_traces(textposition="inside", hovertemplate="%{customdata}")
+    fig3.update_traces(textposition="inside", hovertemplate="%{customdata}", textfont_size=16)
+    fig3.update_yaxes(tickfont_size=16, tickfont_color="black")
     # fig3.update_layout(legend=dict(xanchor="left", yanchor="bottom"))
 
     st.plotly_chart(fig3, use_container_width=True)
