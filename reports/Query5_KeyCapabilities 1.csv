@@ -1,0 +1,7 @@
+,KCName,SatisfiedBy,Unit,Threshold,Objective,VerificationMethodName
+0,KPP 1,SpatialResolution,meter,20,15,Payload Resolution Test
+1,KPP 2,DataTransmissionRate,Mbps,600,700,Comms Simulation
+2,KPP 3,RevisitTime,day,4.0,3.5,
+3,KSA 1,SONORASatellite_Mass,kilogram,2600,2300,
+4,KSA 2,SONORASatellite_PointingAccuracy,degree,0.5,0.3,Maneuverability Simulation
+5,KSA 3,SONORASatellite_PowerConsumption,Watt,2000,1800,Power Simulation

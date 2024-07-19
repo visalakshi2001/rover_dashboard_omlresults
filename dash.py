@@ -307,8 +307,8 @@ def dashboard():
 def tne():
     colors = px.colors.qualitative.Plotly
 
-    keycap = pd.read_csv(os.path.join("reports", "Query5_KeyCapabilities.csv"), index_col=0)
-    schdata = pd.read_csv(os.path.join("reports", "Query6_Scheduling.csv"), index_col=0)
+    keycap = pd.read_csv(os.path.join("reports", "Query5_KeyCapabilities 1.csv"), index_col=0)
+    schdata = pd.read_csv(os.path.join("reports", "Query6_Scheduling 1.csv"), index_col=0)
 
     topcols = st.columns([1,1])
 
