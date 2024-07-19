@@ -320,24 +320,24 @@ def tne():
             for idx,row in keycap.iterrows():
                 if idx % 3 == 0:
                     st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
-                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
-                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], delta_color="off"
+                            # delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
                             )
         
         with metriccols[1]:
             for idx,row in keycap.iterrows():
                 if idx % 3 == 1:
                     st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
-                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
-                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], delta_color="off"
+                            # delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
                             )
         
         with metriccols[2]:
             for idx,row in keycap.iterrows():
                 if idx % 3 == 2:
                     st.metric(label=row["KCName"] + " (" + row["SatisfiedBy"] + ")", value=str(row["Threshold"]) + " " + row["Unit"], 
-                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], 
-                            delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
+                            delta="Target:" + " " + str(row["Objective"]) + " " + row["Unit"], delta_color="off"
+                            # delta_color="normal" if row["Objective"] < row["Threshold"] else "inverse"
                             )
                 
         st.write(
@@ -377,7 +377,8 @@ def tne():
                                     font_color = "black"
                                     ))
 
-        fig0.update_layout(barmode='overlay', title='Key capacities fulfilled', annotations=annotations)
+        fig0.update_layout(barmode='overlay', title='Key capacities fulfilled', annotations=annotations,
+                           xaxis=dict(visible=False))
         fig0.update_traces(width=0.7)
         fig0.update_yaxes(tickfont_size=14, tickfont_color="black")
 
