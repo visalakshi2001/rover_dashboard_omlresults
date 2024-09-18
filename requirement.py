@@ -44,7 +44,7 @@ def requirementview():
     with bottom[2]:
         cont = st.container(border=True, height=420)
 
-        cont.markdown("<h5>Requirement Details & Satisfaction Details</h5>", True)
+        cont.markdown("<h5>Requirement Details & Satisfaction Status</h5>", True)
 
         cont.markdown(f"""
         **ReqID:** {target_req["ReqID"].iloc[0]} \n 
