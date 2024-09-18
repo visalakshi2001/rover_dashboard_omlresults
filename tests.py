@@ -6,6 +6,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 from issues import issuesinfo
+from plots import scheduletimeline, schedulereviewmilestone
 
 colors = px.colors.qualitative.Plotly
 
@@ -33,66 +34,12 @@ def testschedule():
     schedule_choice = st.selectbox("Select a schedule to view", options=["Test Schedule", "Milestone Schedule"])
 
     if schedule_choice == sch_opts[0]:
-        fig3 = px.timeline(schdata, x_start="Start", x_end="End", y="TestSubjects", color="VMName", 
-                       title="Test Schedules", custom_data=["Start", "End", "VMName"])
-        fig3.update_traces(width=1)
-
-        fig3.add_trace(go.Scatter(name="TimeStamp", x=schdata["End"], y=schdata["TestSubjects"], 
-                                mode="markers",
-                                marker=dict(
-                                    size=10,
-                                    ),
-                                    # hovertemplate="",
-                                    customdata=[schdata["Start"], schdata["End"]],
-                                showlegend=False,
-                                )
-                    )
-        fig3.update_traces(hovertemplate="Start: %{customdata[0]} <br> End: %{customdata[1]} <br> VMName: %{customdata[2]}")
-
-        st.plotly_chart(fig3,use_container_width=True)
+        fig = scheduletimeline()
+        st.plotly_chart(fig ,use_container_width=True)
+        # st.dataframe(pd.read_csv("results/Query6_Scheduling copy.csv", index_col=0), hide_index=True, use_container_width=True)
     
     if schedule_choice == sch_opts[1]:
-        decisionreview = pd.read_csv("results/Query3_Decisions.csv", index_col=0)
-        decisionreview['ReviewStart'] = pd.to_datetime(decisionreview['ReviewStart'])
-        # Define ReviewEnd as 1 hour after ReviewStart (since no end times are given)
-        decisionreview['ReviewEnd'] = decisionreview['ReviewStart'] + pd.Timedelta(hours=1)
-        # Define a function to extract the week of year
-        decisionreview['Week'] = decisionreview['ReviewStart'].dt.strftime('%Y-W%U')
-
-        # Creating the Plotly figure
-        fig = px.timeline(decisionreview, x_start="ReviewStart", x_end="ReviewEnd", y="Review", color="Decision", text="Milestone", hover_name="Milestone",
-                        category_orders={"Review": sorted(decisionreview['Review'].unique(), key=lambda x: str(x))})
-
-        # Update layout to include a dropdown menu for week selection
-        week_options = decisionreview['Week'].unique()
-
-        fig.update_layout(
-            title="Review Schedule",
-            xaxis_title="Time",
-            yaxis_title="Review",
-            # xaxis=dict(
-            #     tickformat="%d %b %Y\n%H:%M",
-            #     # range=[decisionreview['ReviewStart'].min() - pd.Timedelta(days=1), decisionreview['ReviewEnd'].min() + pd.Timedelta(days=6)],
-            # ),
-            updatemenus=[{
-                "buttons": [
-                    {
-                        "args": [
-                            {"xaxis.range": [decisionreview[decisionreview['Week'] == week]['ReviewStart'].min() - pd.Timedelta(days=1), decisionreview[decisionreview['Week'] == week]['ReviewEnd'].max() + pd.Timedelta(days=6)]}
-                        ],
-                        "label": week,
-                        "method": "relayout"
-                    }
-                    for week in week_options
-                ],
-                "direction": "down",
-                "showactive": True,
-                "x": 0.17,
-                "xanchor": "left",
-                "y": 1.15,
-                "yanchor": "top"
-            }]
-        )
+        fig = schedulereviewmilestone()
         st.plotly_chart(fig, True)
 
 def testresults():

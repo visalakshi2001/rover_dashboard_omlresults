@@ -10,11 +10,39 @@ def homefunc():
         bottom = st.container(border=True, height=400)
 
         top.markdown("<h5>Project Overview</h5>", True)
+
+        top.write("Project Name: Rover Design Exercise")
+        top.write("Group Name: Group 3")
+        top.write("Submission Date: September 13th, 2024")
+
         bottom.markdown("<h5>Project Summary</h5>", True)
+
+        bottom.write("No. of Requirements: 6")
+        bottom.write("No. of Componenets: ")
+        bottom.write("No of tooles integrated:  SysMLv2, Jira, Jama ")
 
     with sections[1]:
         cont = st.container(border=True, height=800)
 
         cont.markdown("<h5>Group Summary</h5>", True)
 
-        
+        roles = pd.read_csv("reports/Tasks.csv", index_col=0)
+        role_dict = dict(zip(roles["StudentName"].value_counts().index, 
+                         ["Test Engineer", "Test Engineer", "Systems Architect", "Program Manager", "Software Engineer", "CBTDEV", "Test Engineer"]))
+        roles["Role"] = roles["StudentName"].apply(lambda x: role_dict[x])
+
+        # roles["Completed"] = ["True", "True", "False", "True", "True", "True"]
+
+        cont.dataframe(roles[["StudentName", "Role"]].drop_duplicates(), use_container_width=True)
+
+        cont.dataframe(roles[["StudentName", "Description"]], use_container_width=True)
+
+
+
+def reqs():
+
+    # reqs = pd.read_csv("reports/Requirements.csv")
+
+    # st.dataframe(reqs)
+
+    pass

@@ -11,7 +11,7 @@ import graphviz
 def sysarcfunc():
 
     function = pd.read_csv("results/FunctionalArchitecture.csv", index_col=0)
-    system = pd.read_csv("results/Query2_SystemArchitecture.csv", index_col=0)
+    system = pd.read_csv("results/Query2_SystemArchitecture copy.csv", index_col=0)
     environment = pd.read_csv("results/Environment.csv", index_col=0)
     mission = pd.read_csv("results/Query1_MissionArchitecture 1.csv", index_col=0)
     moe = pd.read_csv("results/Query4_MOEs.csv", index_col=0)
@@ -46,7 +46,7 @@ def sysarcfunc():
         for index, row in system.iterrows():
             sys = row["SystemName"]
             subsys = row["SubsystemName"]
-            subsubsys = row["SubsubsystemName"]
+            subsubsys = row["ComponentName"]
 
             if pd.notna(sys):
                 dot.node(sys)
@@ -61,7 +61,7 @@ def sysarcfunc():
                 if subsubsys not in dot.body:
                     dot.node(subsubsys, shape="box")
                 if pd.notna(subsys):
-                    dot.edge(subsys, subsubsys, label="has subsubsystem")  
+                    dot.edge(subsys, subsubsys, label="has component")  
         st.graphviz_chart(dot, True)
     
     elif graphchoice == "Environments":

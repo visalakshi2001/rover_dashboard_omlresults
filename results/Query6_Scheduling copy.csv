@@ -1,0 +1,11 @@
+,ITPName,DTPName,VM,Include,VMName,TestSubjects,Site,Start,End
+0,SONORA ITP,SONORA DTP,TE3,True,Static Load Test,Rover_Prototype,TE53_Environment,2024-09-01T12:00:00,2024-09-01T13:00:00
+1,SONORA ITP,SONORA DTP,TE5,False,Thermal Test,Rover_Prototype,TE53_Environment,2024-09-01T12:00:00,2024-09-01T13:00:00
+2,SONORA ITP,SONORA DTP,TE7,True,Power Simulation,Rover_PhysicsModel1,,2024-09-02T12:00:00,2024-09-02T13:00:00
+3,SONORA ITP,SONORA DTP,TE10,False,Electromagnetic Compatibility (EMC) Test,Rover_Prototype,TE10_Environment,2024-09-02T12:00:00,2024-09-02T13:00:00
+4,SONORA ITP,SONORA DTP,TE6,True,Vibration Test,Rover_Prototype,TE6_Environment,2024-09-02T12:00:00,2024-09-02T13:00:00
+5,SONORA ITP,SONORA DTP,TE8,True,Maneuverability Simulation,Rover_PhysicsModel2,,2024-09-04T12:00:00,2024-09-04T13:00:00
+6,SONORA ITP,SONORA DTP,TE4,True,Comms Simulation,Rover_CommsModel1,,2024-09-05T12:00:00,2024-09-05T13:00:00
+7,SONORA ITP,SONORA DTP,TE11,False,Payload Resolution Test,Rover_Prototype,TE11_Environment,2024-09-06T12:00:00,2024-09-06T13:00:00
+8,SONORA ITP,SONORA OTP,TE2,True,Mission Capability Test,Rover_Prototype,TE2_Environment,2024-10-01T12:00:00,2024-10-01T13:00:00
+9,SONORA ITP,SONORA OTP,TE9,False,System Limit Test,Rover_Prototype,TE9_Environment,2024-10-02T12:00:00,2024-10-02T13:00:00
