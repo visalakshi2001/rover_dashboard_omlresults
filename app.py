@@ -24,8 +24,9 @@ def main():
     with tabs[0]:
         homefunc()
     with tabs[1]:
-        dashboard()
-        tne()
+        # dashboard()
+        # tne()
+        pass
     with tabs[2]:
         sysarcfunc()
     with tabs[3]:
