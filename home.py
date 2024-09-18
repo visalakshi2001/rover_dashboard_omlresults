@@ -12,7 +12,7 @@ def homefunc():
         top.markdown("<h5>Project Overview</h5>", True)
 
         top.write("Project Name: Rover Design Exercise")
-        top.write("Group Name: Group 3")
+        top.write("Group Name: Group 1")
         top.write("Submission Date: September 13th, 2024")
 
         bottom.markdown("<h5>Project Summary</h5>", True)
@@ -38,11 +38,3 @@ def homefunc():
         cont.dataframe(roles[["StudentName", "Description"]], use_container_width=True)
 
 
-
-def reqs():
-
-    # reqs = pd.read_csv("reports/Requirements.csv")
-
-    # st.dataframe(reqs)
-
-    pass

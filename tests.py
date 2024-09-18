@@ -58,39 +58,22 @@ def testresults():
         reqdata = {
             "RequirementName": reqs["ReqName"].values.tolist(),
             "ReqID": reqs["ReqID"].values.tolist(),
-            'Satisfied': pd.notnull(reqs["SatisfiedName"]), # [0, 0, 0, 0, 0, 0, 1],
+            'Satisfied': pd.notnull(reqs["SatisfiedBy"]), # [0, 0, 0, 0, 0, 0, 1],
             'Verified': pd.notnull(reqs["VerifiedName"]), # [0, 0, 0, 1, 0, 0, 1],
-            'Pending':  reqs[["SatisfiedName", "VerifiedName"]].isnull().all(1), # [1, 1, 1, 0, 1, 1, 0]
+            'Pending':  reqs[["SatisfiedBy", "VerifiedName"]].isnull().all(1), # [1, 1, 1, 0, 1, 1, 0]
             "VerifiedName": reqs["VerifiedName"].values,
-            "SatisfiedName": reqs["SatisfiedName"].values,
+            "SatisfiedName": reqs["SatisfiedBy"].values,
         }
 
-        # st.dataframe(reqdata)
 
     with top[1]:
         
         cont = st.container(border=True, height=400)
 
         cont.markdown("<h5>Related Tests</h5>", True)
-
-        # st.dataframe(schdata)
     
     cont = st.container(border=True)
 
     cont.markdown("<h5>Verification Results (Tracing)</h5>", True)
 
-    fig1 = go.Figure(data=[
-        go.Bar(name='Satisfied', y=reqdata["RequirementName"], x=reqdata["Satisfied"], 
-               orientation="h", marker=dict(color=colors[2]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
-               ),
-        go.Bar(name='Verified', y=reqdata["RequirementName"], x=reqdata["Verified"], 
-            orientation="h", marker=dict(color=colors[0]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
-            ),
-        go.Bar(name='Pending', y=reqdata["RequirementName"], x=reqdata["Pending"], 
-            orientation="h", marker=dict(color=colors[1]), customdata=reqdata["ReqID"], hovertemplate=" %{customdata} "
-            )
-    ])
-
-    fig1.update_layout(barmode='stack', title='Requirements Satisfaction and Verification Status')
-    fig1.update_yaxes(tickfont_size=16, tickfont_color="black")
-    cont.plotly_chart(fig1)
+    
