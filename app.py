@@ -1,8 +1,8 @@
 import streamlit as st
-# from dash import dashboard, tne
+from dash import dashboard, tne
 from home import homefunc
 from architechture import sysarcfunc
-from tests import testschedule
+from tests import testschedule, testresults
 
 st.set_page_config(page_title="Dashboard", page_icon="🚀", layout="wide")
 
@@ -23,10 +23,15 @@ def main():
     
     with tabs[0]:
         homefunc()
+    with tabs[1]:
+        dashboard()
+        tne()
     with tabs[2]:
         sysarcfunc()
     with tabs[3]:
         testschedule()
+    with tabs[4]:
+        testresults()
 
 if __name__ == "__main__":
 

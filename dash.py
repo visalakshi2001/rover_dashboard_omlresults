@@ -423,7 +423,7 @@ def tne():
 
     st.plotly_chart(fig3,use_container_width=True)
 
-    print(schdata["End"])
+    # print(schdata["End"])
 
     # # Sunburst Chart of Test Distribution by Site and Test Type
     # sunburst_data = schdata[pd.notnull(schdata['Site'])]
