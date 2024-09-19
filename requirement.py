@@ -10,7 +10,7 @@ def requirementview():
 
     reqs = pd.read_csv("reports/Requirements.csv", index_col=0)
 
-    req_choice = st.selectbox("Select a Requirement", options=reqs["ReqName"].values.tolist())
+    req_choice = st.selectbox("Select a Requirement", options=reqs["ReqName"].sort_values().tolist())
 
     top = st.columns(2)
     bottom = st.columns(3)

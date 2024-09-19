@@ -43,16 +43,6 @@ def testschedule():
         fig = schedulereviewmilestone()
         st.plotly_chart(fig, True)
     
-    from itertools import combinations
-    grouped = schdata[schdata["Include"]==True].groupby('Start').filter(lambda x: len(x) > 1)
-    st.write(grouped)
-    conflicted_pairs = []
-    for start_time, group in grouped.groupby('Start'):
-        vm_names = group['VMName'].tolist()
-        pairs = list(combinations(vm_names, 2))
-        conflicted_pairs.extend(pairs)
-    st.write(set(conflicted_pairs + [conflicted_pairs[0]]))
-
 
 def testresults():
 
