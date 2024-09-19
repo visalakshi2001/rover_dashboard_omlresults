@@ -14,22 +14,12 @@ def homefunc():
 
     with sections[0]:
 
-        # top = st.container(border=True, height=400)
-        # bottom = st.container(border=True,)
-        
         st.markdown("<h5>Project Overview</h5>", True)
         st.markdown(f"**Today:** {datetime.today().date().strftime('%A %B %d, %Y')}", True)
 
         st.metric(label="**🛰️ Project Name**", value="Rover Design Exercise")
         st.metric(label="**🛰️ Group Name**", value="Group 1")
         st.metric(label="**🛰️ Submission Date**", value=datetime.strptime("2024-09-13", "%Y-%m-%d").date().strftime("%A, %B %d %Y"))
-
-
-        # fig = px.pie(roles, names='HasOutput', title='Task Completion Status', 
-        #           labels={'HasOutput': 'Completed (True/False)'}, color_discrete_sequence=[colors[0], colors[1]],
-        #           height=280, width=400)
-
-        # top.plotly_chart(fig)
 
         st.divider()
 

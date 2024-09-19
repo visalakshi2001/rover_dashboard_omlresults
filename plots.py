@@ -18,7 +18,7 @@ def scheduletimeline():
 
     # Creating the Plotly figure
     fig = px.timeline(testscheduling, x_start="Start", x_end="End", y="TestSubjects", color="VMName", text="VMName", hover_name="VM",
-                    category_orders={"Site": sorted(testscheduling['Site'].unique(), key=lambda x: str(x))})
+                    category_orders={"TestSubjects": sorted(testscheduling['TestSubjects'].unique(), key=lambda x: str(x))})
 
     
     # Update layout to include a dropdown menu for week selection
@@ -27,7 +27,7 @@ def scheduletimeline():
     fig.update_layout(
         title="Test Schedule",
         xaxis_title="Time",
-        yaxis_title="Test Site",
+        yaxis_title="Test Subject",
         xaxis=dict(
             tickformat="%d %b %Y\n%H:%M",
             range=[testscheduling['Start'].min() - pd.Timedelta(days=1), testscheduling['End'].min() + pd.Timedelta(days=6)],
