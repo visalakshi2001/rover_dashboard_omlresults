@@ -32,9 +32,9 @@ def main():
         testschedule()
     with tabs[4]:
         testresults()
-    with tabs[-1]:
-        dashboard()
-        tne()
+    # with tabs[-1]:
+    #     dashboard()
+    #     tne()
 
 if __name__ == "__main__":
 
