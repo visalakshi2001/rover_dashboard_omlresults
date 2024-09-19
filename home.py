@@ -45,12 +45,12 @@ def homefunc():
     with sections[1]:
         st.markdown("<h5>Group Summary</h5>", True)
 
-        role_dict = dict(zip(roles["StudentName"].value_counts().index, 
-                         ["Test Engineer", "Test Engineer", "Systems Architect", "Program Manager", "Software Engineer", "CBTDEV", "Test Engineer"]))
-        roles["Role"] = roles["StudentName"].apply(lambda x: role_dict[x])
+        # role_dict = dict(zip(roles["StudentName"].value_counts().index, 
+        #                  ["Test Engineer", "Test Engineer", "Systems Architect", "Program Manager", "Software Engineer", "CBTDEV", "Test Engineer"]))
+        # roles["Role"] = roles["StudentName"].apply(lambda x: role_dict[x])
 
         st.markdown("<h6>🛰️ Assigned Roles</h6>", True)
-        st.dataframe(roles[["StudentName", "Role"]].drop_duplicates(), hide_index=True, use_container_width=True)
+        st.dataframe(roles[["StudentName", "Role", "Responsibilities"]].drop_duplicates(), hide_index=True, use_container_width=True)
 
         # st.divider()
 
