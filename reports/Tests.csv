@@ -1,5 +1,8 @@
-,Test,TestSubject,TestOutput,VerifiesRequirement
-0,CargoTest,Group1_Rover,,SYS-4
-1,CoGTest,Group1_Rover,,
-2,MassTest,Group1_Rover,MassTest_MassMeasurement,SYS-7
-3,ThermalTest,Group1_Rover,,
+" ",Test,TestSubject,TestOutput,VerifiesRequirement
+"0",Cargo Test,Group1_Rover,CargoTest_LoadMeasurement,SYS-4
+"1",CoG Test,Group1_Rover,,
+"2",Mass Test,Group1_Rover,MassTest_MassMeasurement,SYS-7
+"3",Thermal Test,Group1_Rover,,
+"4",Power Simulation,Group1_Rover,,
+"5",Maneuverability Simulation,Group1_Rover,ManeuverTest_RCMeasurement,SYS-2
+"6",Comms Simulation,Group1_Rover,,SYS-3

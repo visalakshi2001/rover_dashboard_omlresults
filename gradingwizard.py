@@ -16,5 +16,5 @@ def gradingtaskcompletion():
         st.dataframe(taskscompleted, hide_index=True, use_container_width=True, height=500)
     
     with sections[1]:
-        st.markdown("<h5>❗ Issues Information </h5>", True)
-        issuesinfo()
+        # st.markdown("<h5>❗ Issues Information </h5>", True)
+        issuesinfo(500)

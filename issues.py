@@ -1,5 +1,6 @@
 import streamlit as st
-
+import pandas as pd
+from itertools import combinations
 
 def sysissues():
 
@@ -57,7 +58,76 @@ def sysissues():
                             <li>Conflict Type: No Environment</li>  \
                             ",True)
 
-def issuesinfo():
-    st.markdown("<h6>Issues</h6>", True)
-    with st.container(border=True, height=350):
-        st.warning('Four tests have overlapped scheduling (find more info on Issues tab)', icon="⚠️")
+def issuesinfo(height):
+    st.markdown("<h6>Issues &nbsp; <i>(scroll to view all)</i> </h6>", True)
+    issues_dict = warningdetails()
+
+    with st.container(border=True, height=height):
+        for warn in issues_dict["requirement"]:
+            st.warning(warn, icon="⚠️")
+        for warn in issues_dict["testtime"]:
+            st.warning(warn, icon="⚠️")
+        for warn in issues_dict["testsite"]:
+            st.warning(warn, icon="⚠️")
+        for warn in issues_dict["testreq"]:
+            st.error(warn, icon="❗")
+
+def warningdetails():
+
+    # not satisfied not verified requirements
+    reqs = pd.read_csv("reports/Requirements.csv", index_col=0)
+
+    # scheduling conflicts for time on test subject or test site
+    schedule = pd.read_csv("results/Query6_Scheduling copy.csv", index_col=0)
+
+    # test does not have any test site and does not verify requirement
+    tests = pd.read_csv("reports/Tests.csv", index_col=0)
+
+    issues_dict = {
+        "requirement": [],
+        "testtime": [],
+        "testsite": [],
+        "testreq": []
+    }
+
+    # ################ requirement
+
+    for index, row in reqs.iterrows():
+        requirement = row['ReqName']
+        satisfiedby = row['SatisfiedBy']
+        verifiedby = row['VerifiedName']
+
+        if pd.isnull(satisfiedby):
+            issues_dict["requirement"].append(f"{requirement} is not satisfied by any System")
+        if pd.isnull(verifiedby):
+            issues_dict["requirement"].append(f"{requirement} is not verified by any Test/Activity")
+    
+    # ################ test site and time
+    grouped = schedule[schedule["Include"]==True].groupby('Start').filter(lambda x: len(x) > 1)
+    time_conflicted_pairs = []
+    for time, group in grouped.groupby('Start'):
+        vm_names = group['VMName'].tolist()
+        pairs = list(combinations(vm_names, 2))
+        time_conflicted_pairs.extend(pairs)
+    
+    grouped = schedule[schedule["Include"]==True].groupby('Start').filter(lambda x: len(x) > 1)
+    site_conflicted_pairs = []
+    for site, group in grouped.groupby('Site'):
+        vm_names = group['VMName'].tolist()
+        pairs = list(combinations(vm_names, 2))
+        site_conflicted_pairs.extend(pairs)
+
+    for pair in time_conflicted_pairs:
+        issues_dict["testtime"].append(f"{pair[0]} and {pair[0]} have potential time overlap")
+
+    for pair in time_conflicted_pairs:
+        issues_dict["testsite"].append(f"{pair[0]} and {pair[0]} have test site overlap")
+
+    # ################ test requirement
+    for index,row in tests.iterrows():
+        verifies = row["VerifiesRequirement"]
+        test = row["Test"]
+        if pd.isnull(verifies):
+            issues_dict["testreq"].append(f"Test {test} does not verify any Requirement")
+
+    return issues_dict
