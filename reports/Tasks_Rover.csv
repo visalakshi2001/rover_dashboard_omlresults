@@ -1,5 +1,5 @@
 ,TaskID,Description,Role,Responsibilities,StudentName,Outputs
-0,SIE2501-10,Import SYSMLV2 Files into Violet,Systems Architect,SE Management and Plannin,Nora Whitfield,
+0,SIE2501-10,Import SYSMLV2 Files into Violet,Systems Architect,SE Management and Planning,Nora Whitfield,
 1,SIE2501-16,Create a Verification Plan for the System,Program Manager,Needs and Requirements,Felix Carrington,Rover_Verification_Strategy
 2,SIE2501-17,Create a detailed Hardware design (CAD model) for System,Software Engineer,Architecture and Verification Plan,Amelia Sterling,SIE250_CADModel
 3,SIE2501-22,Construct Rover and all Hardware Components,Test Engineer,"Detailed HW Design, Integration Plan",Julian Porter,

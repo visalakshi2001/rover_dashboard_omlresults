@@ -4,6 +4,7 @@ from home import homefunc
 from architechture import sysarcfunc
 from requirement import requirementview
 from tests import testschedule, testresults
+from gradingwizard import gradingtaskcompletion
 
 st.set_page_config(page_title="Dashboard", page_icon="🚀", layout="wide")
 
@@ -32,9 +33,8 @@ def main():
         testschedule()
     with tabs[4]:
         testresults()
-    # with tabs[-1]:
-    #     dashboard()
-    #     tne()
+    with tabs[5]:
+        gradingtaskcompletion()
 
 if __name__ == "__main__":
 
