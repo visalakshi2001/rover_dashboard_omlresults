@@ -18,7 +18,7 @@ def main():
     st.header("🛰️ Instructor Dashboard", divider="violet")
 
     TABS = ["Home", "Requirements", "Architecture", 
-            "Test Schedule", "Test Results", "Grading Wizard", "Dash"]
+            "Test Schedule", "Test Results", "Grading Wizard"]
     
     tabs = st.tabs(TABS)
     
