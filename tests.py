@@ -52,6 +52,7 @@ def testresults():
         test = pd.read_csv(os.path.join("reports", "Tests.csv"), index_col=0)
         schtests = pd.read_csv(os.path.join("results", "Query6_Scheduling copy.csv"), index_col=0)
         reqs = pd.read_csv("reports/Requirements.csv", index_col=0)
+        checks = pd.read_csv("results/Query7_VerificationCheck.csv", index_col=0)
 
         test_choice = st.selectbox("Select a test to view details", options=schtests[schtests["Include"] == True]["VMName"].values.tolist())
         target_test = test[test["Test"] == test_choice]
@@ -101,6 +102,13 @@ def testresults():
             # Add AllocatedTo node and edge if it doesn't already exist
             if pd.notna(output):
                 dot.edge(test, output, label="has output")
+                target_check = checks[checks["TestName"] == test_choice]
+                if not target_check.empty:
+                    if pd.isnull(target_check["Unit"].iloc[0]): target_check["Unit"].iloc[0] = ""
+                    check_node = target_check["Value"].iloc[0] + target_check["Unit"].iloc[0]
+                    dot.node(check_node, shape="box")
+                    dot.edge(output, check_node, label="has output value")
+
             if pd.notna(verreq):
                 if verreq not in dot.body:
                     dot.node(verreq, shape="box")
