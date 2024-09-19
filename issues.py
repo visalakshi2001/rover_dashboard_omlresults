@@ -83,11 +83,14 @@ def warningdetails():
     # test does not have any test site and does not verify requirement
     tests = pd.read_csv("reports/Tests.csv", index_col=0)
 
+    verification = pd.read_csv("results/Query7_VerificationCheck.csv", index_col=0)
+
     issues_dict = {
         "requirement": [],
         "testtime": [],
         "testsite": [],
-        "testreq": []
+        "testreq": [],
+        "unverified": []
     }
 
     # ################ requirement
@@ -129,5 +132,7 @@ def warningdetails():
         test = row["Test"]
         if pd.isnull(verifies):
             issues_dict["testreq"].append(f"Test {test} does not verify any Requirement")
+    
+    
 
     return issues_dict

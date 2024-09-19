@@ -135,8 +135,8 @@ def testresults():
         with subcols_bt[1]:
             pass
     
-    with bottom[1]:
+    # with bottom[1]:
 
-        cont = st.container(border=True, height=400)
+    #     cont = st.container(border=True, height=400)
 
-        cont.markdown("<h5>Related Tests</h5>", True)
+    #     cont.markdown("<h5>Related Tests</h5>", True)

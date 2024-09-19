@@ -26,11 +26,11 @@ def homefunc():
         st.markdown("<h5>Project Summary</h5>", True)
         left, right = st.columns(2)
 
-        left.metric(label="**🛰️ No. of Requirements**", value=6)
+        left.metric(label="**🛰️ No. of Requirements**", value=7)
         left.metric(label="**🛰️ No. of Components**", value=15)
         left.metric(label="**🛰️ No. of Tools integrated**", value=4, delta="SysML v2, Jama, Jira, GitHub")
-        right.metric(label="**🛰️ No. of Tasks**", value=10)
-        right.metric(label="**🛰️ No. of Complete Tasks**", value=8)
+        right.metric(label="**🛰️ No. of Tasks**", value=11)
+        right.metric(label="**🛰️ No. of Complete Tasks**", value=4)
 
     with sections[1]:
         st.markdown("<h5>Group Summary</h5>", True)
