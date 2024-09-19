@@ -5,4 +5,4 @@
 "3",Thermal Test,Group1_Rover,,
 "4",Power Simulation,Group1_Rover,,
 "5",Maneuverability Simulation,Group1_Rover,ManeuverTest_RCMeasurement,SYS-2
-"6",Comms Simulation,Group1_Rover,,SYS-3
+"6",Comms Simulation,Group1_Rover,CommsTest_SuccesRate,SYS-3

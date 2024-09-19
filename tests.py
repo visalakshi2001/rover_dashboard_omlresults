@@ -109,6 +109,34 @@ def testresults():
         cont.graphviz_chart(dot)
     
 
-    cont = st.container(border=True, height=400)
+    bottom = st.columns(2)
 
-    cont.markdown("<h5>Related Tests</h5>", True)
+
+    with bottom[0]:
+        checks = pd.read_csv("results/Query7_VerificationCheck.csv", index_col=0)
+
+        subcols_bt = st.columns(2)
+        target_check = checks[checks["TestName"] == test_choice]
+
+        with subcols_bt[0]:
+            for i,row in target_check.iterrows():
+                if row["Value"] > row["MinValue"] or row["Value"] == row["MinValue"]:
+                    delta_color = "normal"
+                else: delta_color = "inverse"
+                if pd.isnull(row["Unit"]): row["Unit"] = ""
+
+                st.metric(label=row["TestMeasurement"], 
+                          value=row["Value"] + row["Unit"], 
+                          delta="Min-Value: " + row["MinValue"] + row["Unit"], 
+                          delta_color=delta_color)
+        if target_check.empty == True:
+            st.warning(f"{test_choice} does not have any verification results yet", icon="⚠️")
+
+        with subcols_bt[1]:
+            pass
+    
+    with bottom[1]:
+
+        cont = st.container(border=True, height=400)
+
+        cont.markdown("<h5>Related Tests</h5>", True)

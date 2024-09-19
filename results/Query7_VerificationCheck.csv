@@ -1,0 +1,4 @@
+,MissionReq,MissionReqName,SystemQuantity,TestName,TestOutput,TestMeasurement,Unit,Value,MinValue
+0,SYS-4,Cargo Requirement,cargoDeliverySuccessRate,Cargo Test,TE7_TestData,cargoDeliverySuccessRate_Measurement,percentage,72.88,75
+1,SYS-7,Mass Requirement,MassMeasurementKilogram,Mass Test,TE53_TestData,MassTest_MassMeasurement,kg,22,20
+2,SYS-3,Autonomous Requirement,commsSuccessRate,Comms Simulation,TE4_TestData,CommsTest_SuccesRate,NaN,Pass,Pass
