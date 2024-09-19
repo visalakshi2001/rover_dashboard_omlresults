@@ -11,7 +11,7 @@ def gradingtaskcompletion():
     with sections[0]:
         st.markdown("<h5>✅ Task Output </h5>", True)
 
-        taskscompleted = roles[["StudentName", "Role", "Description"]].copy()
+        taskscompleted = roles[["StudentName", "Responsibilities", "Description"]].rename({"Responsibilities": "Role"}, axis=1).copy()
         taskscompleted["Completed"] = pd.notnull(roles["Outputs"])
         st.dataframe(taskscompleted, hide_index=True, use_container_width=True, height=500)
     
