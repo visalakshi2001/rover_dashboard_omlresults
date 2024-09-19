@@ -18,7 +18,7 @@ def main():
     st.header("🛰️ Instructor Dashboard", divider="violet")
 
     TABS = ["Home", "Requirements", "Architecture", 
-            "Test Schedule", "Test Results", "Grading Wizard"]
+            "Test Schedule", "Test Results", "Grading Wizard", "Dash"]
     
     tabs = st.tabs(TABS)
     
@@ -32,6 +32,9 @@ def main():
         testschedule()
     with tabs[4]:
         testresults()
+    with tabs[-1]:
+        dashboard()
+        tne()
 
 if __name__ == "__main__":
 
