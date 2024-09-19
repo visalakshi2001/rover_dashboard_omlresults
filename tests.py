@@ -120,15 +120,21 @@ def testresults():
 
         with subcols_bt[0]:
             for i,row in target_check.iterrows():
-                if row["Value"] > row["MinValue"] or row["Value"] == row["MinValue"]:
+                if row["Value"] > row["MinMaxValue"] or row["Value"] == row["MinMaxValue"]:
                     delta_color = "normal"
                 else: delta_color = "inverse"
                 if pd.isnull(row["Unit"]): row["Unit"] = ""
 
-                st.metric(label=row["TestMeasurement"], 
-                          value=row["Value"] + row["Unit"], 
-                          delta="Min-Value: " + row["MinValue"] + row["Unit"], 
-                          delta_color=delta_color)
+                if test_choice == "Mass Test":
+                    st.metric(label=row["TestMeasurement"], 
+                            value=row["Value"] + row["Unit"], 
+                            delta="Max-Value: " + row["MinMaxValue"] + row["Unit"], 
+                            delta_color=delta_color)
+                else:
+                    st.metric(label=row["TestMeasurement"], 
+                            value=row["Value"] + row["Unit"], 
+                            delta="Min-Value: " + row["MinMaxValue"] + row["Unit"], 
+                            delta_color=delta_color)
         if target_check.empty == True:
             st.warning(f"{test_choice} does not have any verification results yet", icon="⚠️")
 
