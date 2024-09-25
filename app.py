@@ -1,5 +1,4 @@
 import streamlit as st
-from dash import dashboard, tne
 from home import homefunc
 from architecture import sysarcfunc
 from requirement import requirementview
