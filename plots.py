@@ -76,10 +76,6 @@ def schedulereviewmilestone():
         title="Review Schedule",
         xaxis_title="Time",
         yaxis_title="Review",
-        # xaxis=dict(
-        #     tickformat="%d %b %Y\n%H:%M",
-        #     # range=[decisionreview['ReviewStart'].min() - pd.Timedelta(days=1), decisionreview['ReviewEnd'].min() + pd.Timedelta(days=6)],
-        # ),
         updatemenus=[{
             "buttons": [
                 {

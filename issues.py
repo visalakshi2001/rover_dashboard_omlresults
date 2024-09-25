@@ -94,7 +94,6 @@ def warningdetails():
     }
 
     # ################ requirement
-
     for index, row in reqs.iterrows():
         requirement = row['ReqName']
         satisfiedby = row['SatisfiedBy']
