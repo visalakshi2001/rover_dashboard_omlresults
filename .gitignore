@@ -5,3 +5,5 @@ roverd/*
 .ipynb_checkpoints/*
 */.ipynb_checkpoints/
 *.ipynb_checkpoints/*
+dash.py
+.devcontainer

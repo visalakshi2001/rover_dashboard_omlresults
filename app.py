@@ -1,7 +1,7 @@
 import streamlit as st
 from dash import dashboard, tne
 from home import homefunc
-from architechture import sysarcfunc
+from architecture import sysarcfunc
 from requirement import requirementview
 from tests import testschedule, testresults
 from gradingwizard import gradingtaskcompletion
@@ -9,12 +9,6 @@ from gradingwizard import gradingtaskcompletion
 st.set_page_config(page_title="Dashboard", page_icon="🚀", layout="wide")
 
 def main():
-
-    # st.header("🛰️ Rover System Dashboard", divider=True)
-    # dashboard()
-
-    # st.header("🧮 Testing and Evaluation", divider=True)
-    # tne()
 
     st.header("🛰️ Instructor Dashboard", divider="violet")
 
