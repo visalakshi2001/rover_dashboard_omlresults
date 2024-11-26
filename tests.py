@@ -32,7 +32,7 @@ def testschedule():
         issuesinfo(400)    
     
     sch_opts = ["Test Schedule", "Milestone Schedule"]
-    schedule_choice = st.selectbox("Select a schedule to view", options=["Test Schedule", "Milestone Schedule"])
+    schedule_choice = st.selectbox("Select a schedule to view", options=sch_opts)
 
     if schedule_choice == sch_opts[0]:
         fig = scheduletimeline()

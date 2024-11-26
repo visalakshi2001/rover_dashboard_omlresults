@@ -58,19 +58,30 @@ def sysissues():
                             <li>Conflict Type: No Environment</li>  \
                             ",True)
 
-def issuesinfo(height):
-    st.markdown("<h6>Issues &nbsp; <i>(scroll to view all)</i> </h6>", True)
+def issuesinfo(height, in_container=False):
     issues_dict = warningdetails()
 
-    with st.container(border=True, height=height):
-        for warn in issues_dict["requirement"]:
-            st.warning(warn, icon="⚠️")
-        for warn in issues_dict["testtime"]:
-            st.warning(warn, icon="⚠️")
-        for warn in issues_dict["testsite"]:
-            st.warning(warn, icon="⚠️")
-        for warn in issues_dict["testreq"]:
-            st.error(warn, icon="❗")
+    if in_container:
+        with st.expander("❗ Issues (expand to view all)", expanded=True):
+            for warn in issues_dict["requirement"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testtime"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testsite"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testreq"]:
+                st.error(warn, icon="❗")
+    else:
+        st.markdown("<h6>Issues &nbsp; <i>(scroll to view all)</i> </h6>", True)
+        with st.container(border=True, height=height):
+            for warn in issues_dict["requirement"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testtime"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testsite"]:
+                st.warning(warn, icon="⚠️")
+            for warn in issues_dict["testreq"]:
+                st.error(warn, icon="❗")
 
 def warningdetails():
 

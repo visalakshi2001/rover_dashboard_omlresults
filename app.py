@@ -6,7 +6,7 @@ from home import homefunc
 from architecture import sysarcfunc
 from requirement import requirementview
 from tests import testschedule, testresults
-from gradingwizard import gradingtaskcompletion
+from gradingsupport import gradingtaskcompletion
 
 # Set page configuration, page title is the titlebar content, icon also appears on title bar
 st.set_page_config(page_title="Dashboard", page_icon="🚀", layout="wide")
@@ -19,7 +19,7 @@ def main():
 
     # create the list of tabs in a list
     TABS = ["Home", "Requirements", "Architecture", 
-            "Test Schedule", "Test Results", "Grading Wizard"]
+            "Test Schedule", "Test Results", "Grading Support"]
     # pass the list to make a tab component
     tabs = st.tabs(TABS)
     
